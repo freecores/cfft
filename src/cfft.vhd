@@ -12,7 +12,7 @@
 --
 ---------------------------------------------------------------------------------------------------
 --
--- Description : radix 4 1024 point FFT input 12 bit Output 14 bit with 
+-- Description : 4-based 1024 point FFT input 12 bit Output 14 bit with 
 --               limit and overfall processing internal
 --
 --              The gain is 0.0287 for FFT and 29.4 for IFFT
