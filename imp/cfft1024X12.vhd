@@ -48,6 +48,16 @@
 -- Desccription    :    initial release	
 --
 ---------------------------------------------------------------------------------------------------
+--
+-- Revisions       :	0
+-- Revision Number : 	2
+-- Version         :	1.2.0
+-- Date            :	Nov 19 2002
+-- Modifier        :   	ZHAO Ming 
+-- Desccription    :    add output data position indication 
+--	             
+--
+---------------------------------------------------------------------------------------------------
 
 
 library IEEE;
@@ -64,7 +74,8 @@ entity cfft1024X12 is
 		 inputbusy : out STD_LOGIC;
 		 outdataen : out STD_LOGIC;
 		 Iout : out STD_LOGIC_VECTOR(13 downto 0);
-		 Qout : out STD_LOGIC_VECTOR(13 downto 0)
+		 Qout : out STD_LOGIC_VECTOR(13 downto 0);
+		 OutPosition : out STD_LOGIC_VECTOR( 9 downto 0 )
 	     );
 end cfft1024X12;
 
@@ -87,7 +98,8 @@ component cfft
 		 inputbusy : out STD_LOGIC;
 		 outdataen : out STD_LOGIC;
 		 Iout : out STD_LOGIC_VECTOR(WIDTH+1 downto 0);
-		 Qout : out STD_LOGIC_VECTOR(WIDTH+1 downto 0)
+		 Qout : out STD_LOGIC_VECTOR(WIDTH+1 downto 0);
+		 OutPosition : out STD_LOGIC_VECTOR( 2*STAGE-1 downto 0 )
 	     );
 end component;
 
@@ -109,7 +121,9 @@ port map (
 	inputbusy=>inputbusy,
 	outdataen=>outdataen,
 	Iout=>Iout,
-	Qout=>Qout
+	Qout=>Qout,
+	OutPosition=>OutPosition
+
 );
 
 

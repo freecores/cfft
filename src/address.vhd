@@ -43,6 +43,16 @@
 --						add rmask1,rmask2,wmask1,wmask2 signal
 --
 ---------------------------------------------------------------------------------------------------
+--
+-- Revisions       :	0
+-- Revision Number : 	3
+-- Version         :	1.3.0
+-- Date            :	Nov 19 2002
+-- Modifier        :   	ZHAO Ming 
+-- Desccription    :    add output data position indication 
+--	             
+--
+---------------------------------------------------------------------------------------------------
 
 
 library IEEE;
@@ -73,7 +83,8 @@ entity address is
 		 factorstart : out STD_LOGIC;
 		 cfft4start : out STD_LOGIC;
 		 outdataen : out std_logic;
-		 inputbusy : out std_logic
+		 inputbusy : out std_logic;
+		 OutPosition : out STD_LOGIC_VECTOR( 2*STAGE-1 downto 0 )
 	     );
 end address;
 
@@ -117,6 +128,16 @@ architecture address of address is
 		return result;
 	end counter2addr;
 
+	function outcounter2addr(
+		counter : std_logic_vector 
+	) return std_logic_vector is
+	variable result	:std_logic_vector(counter'range);
+	begin					  
+		for n in 0 to STAGE-1 loop
+			result( 2*n+1 downto 2*n ):=counter( counter'high-2*n downto counter'high-2*n-1 );
+		end loop;
+		return result;
+	end outcounter2addr;
 
 signal rstate,wstate,state:std_logic_vector( 3 downto 0 );
 signal rmask1,rmask2,wmask1,wmask2:std_logic_vector( STAGE-1 downto 0 );
@@ -131,7 +152,7 @@ constant OUTDELAY:integer:=7;
 
 begin
 outdataen<=outcounter(STAGE*2);
-
+OutPosition<=outcounter2addr( outcounter( STAGE*2-1 downto 0 ));
 count:process( clk, rst )
 begin
 	if rst='1' then

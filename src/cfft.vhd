@@ -61,6 +61,16 @@
 --	             
 --
 ---------------------------------------------------------------------------------------------------
+--
+-- Revisions       :	0
+-- Revision Number : 	3
+-- Version         :	1.3.0
+-- Date            :	Nov 19 2002
+-- Modifier        :   	ZHAO Ming 
+-- Desccription    :    add output data position indication 
+--	             
+--
+---------------------------------------------------------------------------------------------------
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
@@ -82,7 +92,8 @@ entity cfft is
 		 inputbusy : out STD_LOGIC;
 		 outdataen : out STD_LOGIC;
 		 Iout : out STD_LOGIC_VECTOR(WIDTH+1 downto 0);
-		 Qout : out STD_LOGIC_VECTOR(WIDTH+1 downto 0)
+		 Qout : out STD_LOGIC_VECTOR(WIDTH+1 downto 0);
+		 OutPosition : out STD_LOGIC_VECTOR( 2*STAGE-1 downto 0 )
 	     );
 end cfft;
 
@@ -111,8 +122,9 @@ component address
 		 factorstart : out STD_LOGIC;
 		 cfft4start : out STD_LOGIC;
 		 outdataen : out std_logic;
-		 inputbusy : out std_logic
-	     );
+		 inputbusy : out std_logic;
+	     OutPosition : out STD_LOGIC_VECTOR( 2*STAGE-1 downto 0 )
+		 );
 end component;
 
 component blockdram
@@ -219,7 +231,8 @@ port map (
 	factorstart=>factorstart,
 	cfft4start=>cfft4start,
 	outdataen=>outdataen,
-	inputbusy=>inputbusy
+	inputbusy=>inputbusy,
+	OutPosition=>OutPosition
 	     );
 
 Iram:blockdram
