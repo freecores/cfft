@@ -30,7 +30,7 @@
 --			clk : main clk 		-- I have test 90M with Xilinx virtex600E
 --          rst : globe reset 	-- '1' for reset
 --			start : start fft	-- one clock '1' before data input
---			inv : '0' for fft and '1' for ifft, it is sampled when start is '1' 
+--			invert : '0' for fft and '1' for ifft, it is sampled when start is '1' 
 --			Iin,Qin : data input-- following start immediately, input data
 --                              -- power should not be too big
 --          inputbusy : if it change to '0' then next fft is enable
@@ -86,7 +86,7 @@ entity cfft is
 		 clk : in STD_LOGIC;
 		 rst : in STD_LOGIC;
 		 start : in STD_LOGIC;
-		 inv : in std_logic;
+		 invert : in std_logic;
 		 Iin : in STD_LOGIC_VECTOR(WIDTH-1 downto 0);
 		 Qin : in STD_LOGIC_VECTOR(WIDTH-1 downto 0);
 		 inputbusy : out STD_LOGIC;
@@ -151,7 +151,7 @@ component cfft4
 		 clk : in STD_LOGIC;
 		 rst : in STD_LOGIC;
 		 start : in STD_LOGIC;
-		 inv : in std_logic;
+		 invert : in std_logic;
 		 I : in STD_LOGIC_VECTOR(WIDTH-1 downto 0);
 		 Q : in STD_LOGIC_VECTOR(WIDTH-1 downto 0);
 		 Iout : out STD_LOGIC_VECTOR(WIDTH+1 downto 0);
@@ -195,7 +195,7 @@ component rofactor
 		 clk : in STD_LOGIC;
 		 rst : in STD_LOGIC;
 		 start : in STD_LOGIC;
-		 inv : in std_logic;
+		 invert : in std_logic;
 		 angle : out STD_LOGIC_VECTOR(2*STAGE-1 downto 0)
 	     );
 end component;
@@ -275,7 +275,7 @@ port map (
 	clk=>clk,
 	rst=>rst,
 	start=>cfft4start,
-	inv=>inv_reg,
+	invert=>inv_reg,
 	I=>Iramout,
 	Q=>Qramout,
 	Iout=>Icfft4out,
@@ -328,7 +328,7 @@ port map (
 	clk=>clk,
 	rst=>rst,
 	start=>factorstart,
-	inv=>inv_reg,
+	invert=>inv_reg,
 	angle=>angle
 	     );
 
@@ -338,7 +338,7 @@ begin
 		inv_reg<='0';
 	elsif clk'event and clk='1' then
 		if start='1' then
-			inv_reg<=inv;
+			inv_reg<=invert;
 		end if;
 	end if;
 end process;

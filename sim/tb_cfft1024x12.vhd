@@ -53,7 +53,7 @@ ARCHITECTURE tester OF cfft1024x12_tester1 IS
       clk       : IN     STD_LOGIC ;
       rst       : IN     STD_LOGIC ;
       start     : IN     STD_LOGIC ;
-      inv       : IN     std_logic ;
+      invert       : IN     std_logic ;
       Iin       : IN     STD_LOGIC_VECTOR (11 DOWNTO 0);
       Qin       : IN     STD_LOGIC_VECTOR (11 DOWNTO 0);
       inputbusy : OUT    STD_LOGIC ;
@@ -77,7 +77,7 @@ ARCHITECTURE tester OF cfft1024x12_tester1 IS
 	signal 	clock : std_logic:='0';
 	signal 	reset : std_logic:='0';
 	signal 	start : std_logic:='0';
-    signal	inv       : 	std_logic ;
+    signal	invert       : 	std_logic ;
     signal	Iin       :   STD_LOGIC_VECTOR (11 DOWNTO 0);
     signal	Qin       :   STD_LOGIC_VECTOR (11 DOWNTO 0);
     signal	inputbusy :   STD_LOGIC:='0' ;
@@ -95,7 +95,7 @@ BEGIN
          clk       => clock,
          rst       => reset,
          start     => start,
-         inv       => inv,
+         invert       => invert,
          Iin       => Iin,
          Qin       => Qin,
          inputbusy => inputbusy,
@@ -111,7 +111,7 @@ BEGIN
 clock <= not clock after Tck_half;
 reset <= '1', '0' after 2*Tck_half;
 start <= '0', '1' after 3*Tck_half, '0' after 5*Tck_half;-- only one FFT is done
-inv <= '0';-- FFT
+invert <= '0';-- FFT
 
 ----------------------------------------------------------------------------
 --

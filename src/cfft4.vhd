@@ -39,7 +39,7 @@ entity cfft4 is
 		 clk : in STD_LOGIC;
 		 rst : in STD_LOGIC;
 		 start : in STD_LOGIC;
-		 inv : in std_logic;
+		 invert : in std_logic;
 		 I : in STD_LOGIC_VECTOR(WIDTH-1 downto 0);
 		 Q : in STD_LOGIC_VECTOR(WIDTH-1 downto 0);
 		 Iout : out STD_LOGIC_VECTOR(WIDTH+1 downto 0);
@@ -96,7 +96,7 @@ begin
 			when "01" =>
 				RegAI(1)<=I;
 				RegAQ(1)<=Q;	
-				if inv='0' then			 
+				if invert='0' then			 
 					-- for fft *(-j)
 					RegBI(3)<=SXT(RegAQ(1),WIDTH+1)-SXT(RegAQ(3),WIDTH+1);
 					RegBQ(3)<=SXT(RegAI(3),WIDTH+1)-SXT(RegAI(1),WIDTH+1);

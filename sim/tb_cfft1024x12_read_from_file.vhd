@@ -15,7 +15,7 @@ component cfft1024X12
                  clk : in STD_LOGIC;
                  rst : in STD_LOGIC;
                  start : in STD_LOGIC;
-                 inv : in std_logic;
+                 invert : in std_logic;
                  Iin : in STD_LOGIC_VECTOR(11 downto 0);
                  Qin : in STD_LOGIC_VECTOR(11 downto 0);
                  inputbusy : out STD_LOGIC;
@@ -29,7 +29,7 @@ end component;
 signal  clk : STD_LOGIC;
 signal  rst : STD_LOGIC;
 signal  start : STD_LOGIC;
-signal  inv : std_logic;
+signal  invert : std_logic;
 signal  Iin : STD_LOGIC_VECTOR(11 downto 0);
 signal  Qin : STD_LOGIC_VECTOR(11 downto 0);
 signal  inputbusy : STD_LOGIC;
@@ -43,7 +43,7 @@ begin
 f: cfft1024x12 port map(clk=>clk,
                         rst =>rst,
                         start=> start,
-                        inv=>inv,
+                        invert=>invert,
                         Iin=>Iin,
                         Qin=>Qin,
                         inputbusy=>inputbusy,
@@ -70,7 +70,7 @@ begin
                 wait until clk'EVENT and clk='1';
                 rst<='0';
                 wait until clk'EVENT and clk='1';
-                inv<='0';
+                invert<='0';
                 start<='1';
                 wait until clk'EVENT and clk='1';
                 start<='0';

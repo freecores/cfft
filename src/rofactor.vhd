@@ -50,7 +50,7 @@ entity rofactor is
 		 clk : in STD_LOGIC;
 		 rst : in STD_LOGIC;
 		 start : in STD_LOGIC; 
-		 inv : in std_logic;
+		 invert : in std_logic;
 --		 step : in STD_LOGIC_VECTOR(2 downto 0);
 		 angle : out STD_LOGIC_VECTOR(2*STAGE-1 downto 0)
 	     );
@@ -75,7 +75,7 @@ begin
 			counter<=( others=>'0' );				
 			mask<=( others=>'0' );
 --			state<="000";
-			if inv='1' then
+			if invert='1' then
 				inc<=CONV_STD_LOGIC_VECTOR(1,STAGE*2);
 			else
 				inc<=CONV_STD_LOGIC_VECTOR(-1,STAGE*2);

@@ -31,7 +31,7 @@
 --			clk : main clk 		-- I have test 90M with Xilinx virtex600E
 --          rst : globe reset 	-- '1' for reset
 --			start : start fft	-- one clock '1' before data input
---			inv : '0' for fft and '1' for ifft, it is sampled when start is '1' 
+--			invert : '0' for fft and '1' for ifft, it is sampled when start is '1' 
 --			Iin,Qin : data input-- following start immediately, input data
 --                              -- power should not be too big
 --          inputbusy : if it change to '0' then next fft is enable
@@ -68,7 +68,7 @@ entity cfft1024X12 is
 		 clk : in STD_LOGIC;
 		 rst : in STD_LOGIC;
 		 start : in STD_LOGIC;
-		 inv : in std_logic;
+		 invert : in std_logic;
 		 Iin : in STD_LOGIC_VECTOR(11 downto 0);
 		 Qin : in STD_LOGIC_VECTOR(11 downto 0);
 		 inputbusy : out STD_LOGIC;
@@ -92,7 +92,7 @@ component cfft
 		 clk : in STD_LOGIC;
 		 rst : in STD_LOGIC;
 		 start : in STD_LOGIC;
-		 inv : in std_logic;
+		 invert : in std_logic;
 		 Iin : in STD_LOGIC_VECTOR(WIDTH-1 downto 0);
 		 Qin : in STD_LOGIC_VECTOR(WIDTH-1 downto 0);
 		 inputbusy : out STD_LOGIC;
@@ -115,7 +115,7 @@ port map (
 	clk=>clk,
 	rst=>rst,
 	start=>start,
-	inv=>inv,
+	invert=>invert,
 	Iin=>Iin,
 	Qin=>Qin,
 	inputbusy=>inputbusy,
